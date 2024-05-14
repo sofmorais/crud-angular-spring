@@ -1,5 +1,5 @@
 <ng-template #semresultado>
-Nenhum resultado encontrado
+  Nenhum resultado encontrado
 </ng-template>
 
 <mat-table [dataSource]="courses" *ngIf="courses.length > 0 else semresultado">
@@ -23,25 +23,21 @@ Nenhum resultado encontrado
   </ng-container>
 
   <!-- Actions Column -->
-  <!-- Para customizar o td utilizar mat-header-cell e mat-cell -->
   <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef class="action-column">
-      <button mat-mini-fab color="accent" aria-label="Add a new course" (click)="onAdd()" class="action-column-header">
-        <mat-icon>add</mat-icon>
-      </button>
-    </mat-header-cell>
-
+    <mat-header-cell *matHeaderCellDef class="action-column">Ações</mat-header-cell>
     <mat-cell *matCellDef="let course" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Update course">
-        <mat-icon (click)="onEdit(course)">edit</mat-icon>
+      <button mat-icon-button color="primary" aria-label="Like" (click)="registrarLike(course)">
+        <mat-icon>thumb_up</mat-icon>
       </button>
-
-      <button mat-icon-button color="warn" aria-label="Remove course">
-        <mat-icon (click)="onDelete(course)">delete</mat-icon>
+      <span>{{ course.likes }}</span> <!-- Mostra o número de likes -->
+      <button mat-icon-button color="warn" aria-label="Dislike" (click)="registrarDislike(course)">
+        <mat-icon>thumb_down</mat-icon>
       </button>
+      <span>{{ course.dislikes }}</span> <!-- Mostra o número de dislikes -->
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
+<mat-header-cell *matHeaderCellDef class="action-column">

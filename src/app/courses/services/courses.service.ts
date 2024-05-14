@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Course } from '../model/course';
 import { delay, first, tap } from 'rxjs/operators';
+import { Vote } from '../model/vote';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +44,11 @@ export class CoursesService {
 
   delete(id: string) {
     return this.httpClient.delete(`${this.API}/${id}`);
+  }
+
+  loadVotesForCourse(courseId: string): Observable<Vote[]> {
+    return this.httpClient.get<Vote[]>(`${this.API}/courses/${courseId}/votes`);
+    // Substitua '/courses/${courseId}/votes' pela rota correta para carregar os votos de um curso
   }
 
 }
