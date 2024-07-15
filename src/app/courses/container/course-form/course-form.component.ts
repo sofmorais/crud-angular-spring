@@ -90,40 +90,36 @@ export class CourseFormComponent implements OnInit {
     return this.allCategories.filter(category => category.nome.toLowerCase().includes(filterValue));
   }
 
-  /*  toggleCategory(category: CategoriaDTO) {
-     const index = this.categories.findIndex(cat => cat.nome == category.nome);
-     if (index >= 0) {
-       // Se a categoria já estiver presente, remova-a
-       this.categories.splice(index, 1);
-     } else {
-       // Se a categoria não estiver presente, adicione-a
-       this.categories.push(category);
-     }
-   }  */
-
- selected(event: MatAutocompleteSelectedEvent): void {
+  selected(event: MatAutocompleteSelectedEvent): void {
     const newValue = event.option.value;
-    const index = this.categories.findIndex(cat => cat.nome === newValue.nome);
-    
-    if (newValue === 'selectAll') {
+    const index = this.categories.findIndex(cat => cat.nome == newValue.nome);
+
+    if (newValue == 'selectAll') {
       this.selectAlls();
-    } else {
-      if (index >= 0) {
+      } else if (index >= 0) {
         this.categories.splice(index, 1);
       } else {
         this.categories.push(newValue);
       }
-    }
-
+    
     this.categoryInput.nativeElement.value = '';
     requestAnimationFrame(() => {
       this.openAuto(this.matACTrigger);
     });
   }
 
+  toggleProfile(profile: CategoriaDTO) {
+    const index = this.categories.findIndex(p => p.nome == profile.nome);
+      if (index >= 0) {
+      this.categories.splice(index, 1);
+      } else {
+      this.categories.push(profile);
+      }
+  }
+
   selectAlls() {
     this.filteredCategories.pipe(take(1)).subscribe(categories => {
-      const allSelected = this.categories.length === categories.length;
+      const allSelected = this.categories.length == categories.length;
 
       if (allSelected || this.categories.length > 0) {
         this.categories = [];
@@ -134,8 +130,6 @@ export class CourseFormComponent implements OnInit {
   }
 
 
-
-  // Método para verificar se uma categoria está selecionada
   isCategorySelected(category: CategoriaDTO): boolean {
     return this.categories.some(cat => cat.nome == category.nome);
   }
@@ -151,7 +145,6 @@ export class CourseFormComponent implements OnInit {
       this.form.get('name')?.markAsPristine();
     }
   }
-
 
   onSubmit() {
     this.service.save(this.form.value).subscribe({

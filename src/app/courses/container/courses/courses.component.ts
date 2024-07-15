@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { Observable, catchError, of } from 'rxjs';
@@ -8,9 +8,6 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { VotoService } from '../../services/vote.service';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { IpService } from '../../services/ip.service';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-courses',
@@ -45,8 +42,6 @@ export class CoursesComponent implements OnInit {
         })
       );
   }
-
-  
 
   onError(errorMessage: string) {
     this.dialog.open(ErrorDialogComponent, {

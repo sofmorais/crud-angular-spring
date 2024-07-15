@@ -23,7 +23,8 @@
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Categoria</mat-label>
             <mat-chip-list #chipList>
-              <mat-chip *ngFor="let category of categories" (removed)="remove(category)">
+              <mat-chip *ngFor="let category of categories" 
+              (removed)="remove(category)">
                 {{category.nome}}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
@@ -32,23 +33,22 @@
               #categoryInput
               #autocompleteTrigger="matAutocompleteTrigger"
               [formControl]="categoryCtrl"
-              [matChipInputFor]="chipList"
               [matAutocomplete]="auto"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              >
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
             </mat-chip-list>
+
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option
-              value="selectAll"
-              [disabled]="false"
-              aria-label="Select All Categories">
-                {{ categories.length === 0 ? 'Selecionar todas' : 'Limpar seleção' }}
+              <mat-option value="selectAll" aria-label="Select All Categories">
+                {{ categories.length == 0 ? 'Selecionar todas' : 'Limpar todas' }}
               </mat-option>
-              <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+
+              <mat-option *ngFor="let category of filteredCategories | async" [value]="category" (onSelectionChange)="toggleProfile(category)">
                 <mat-checkbox color="primary" [checked]="isCategorySelected(category)">
                   {{category.nome}}
                 </mat-checkbox>
               </mat-option>
+
             </mat-autocomplete>
           </mat-form-field>
 
@@ -85,4 +85,3 @@
     <button mat-button color="warn" (click)="onCancel()" class="btn-space" type="button">Cancel</button>
   </mat-card-actions>
 </mat-card>
-s=

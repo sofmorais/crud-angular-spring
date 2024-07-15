@@ -10,13 +10,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
 import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ActuatorInfoComponent } from './components/infoapi/info-api.component';
 
 
 @NgModule({
   declarations: [
     CoursesComponent,
     CourseFormComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    ActuatorInfoComponent
   ],
   imports: [
     CommonModule,

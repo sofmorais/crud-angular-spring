@@ -1,7 +1,6 @@
 import { VotoService } from './../../services/vote.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Course } from '../../model/course';
-import { IpService } from '../../services/ip.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -25,7 +24,7 @@ export class CoursesListComponent implements OnInit {
   
   readonly displayedColumns = ['name', 'category', 'actions'];
 
-  constructor(private voteService: VotoService, private ipService: IpService) {
+  constructor(private voteService: VotoService) {
     
   }
    registrarLike(cursoId: Course): void {
@@ -44,11 +43,11 @@ export class CoursesListComponent implements OnInit {
     });
   }
 
-  getIpAddress(): void {
+ /*  getIpAddress(): void {
     this.ipService.getIpAddress().subscribe((data: any) => {
       this.ipAddress = data.ip;
     });
-  }
+  } */
 
   getSummary(description: string): string {
     if (description.length > 100) {
@@ -69,7 +68,7 @@ export class CoursesListComponent implements OnInit {
     this.delete.emit(course);
   }
 
-  ngOnInit(): void {    this.getIpAddress();
+  ngOnInit(): void {    
   }
 
 }

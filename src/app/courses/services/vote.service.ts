@@ -24,5 +24,4 @@ export class VotoService {
 
     return this.http.post<Vote>(`${this.API}/dislike?courseId=${courseId}`, {},  { headers });
   }
-
 }
